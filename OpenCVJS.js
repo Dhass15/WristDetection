@@ -149,7 +149,9 @@ function startPoseDetectionLoop() {
             poseLoopId = requestAnimationFrame(detect);
             return;
         }
-
+        if (unityInstance) {
+            unityInstance.SendMessage("CameraManager", "AILoaded");
+        }
         try {
             const poses = await detector.estimatePoses(canvas);
             if (poses.length > 0) {
